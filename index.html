@@ -22,16 +22,16 @@
             border: 2px solid lime;
             padding: 10px;
             background: rgba(0, 0, 0, 0.4);
+            flex-wrap: nowrap;
+            justify-content: space-between;
         }
         .logo-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 0px solid lime;
             padding: 10px;
             width: 160px;
             height: 140px;
-            margin-right: 20px;
             margin-left: 10px;
             background: transparent;
         }
@@ -41,17 +41,29 @@
         }
         .nav {
             display: flex;
-            justify-content: center;
-            gap: 15px;
+            justify-content: space-between;
             flex-grow: 1;
+            margin-left: 20px;
+            max-width: calc(100% - 200px);
         }
         .nav a {
-            padding: 15px 40px;
+            flex: 1;
+            padding: 12px 8px; /* Increased vertical padding */
             border: 2px solid lime;
             text-decoration: none;
             color: cyan;
             text-align: center;
-            font-size: 18px;
+            font-size: 13px;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            min-width: 70px;
+            transition: all 0.1s ease-in-out;
+        }
+        .nav a:active {
+            background: cyan;
+            color: black;
+            border-color: cyan;
         }
         .content {
             border: 2px solid lime;
@@ -60,7 +72,43 @@
             padding: 20px;
             background: rgba(0, 0, 0, 0.4);
         }
+        
+        /* Mobile Responsive */
+        @media (max-width: 800px) {
+            .header-container {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: nowrap;
+            }
+            .logo-container {
+                width: auto;
+                height: auto;
+                margin: 0;
+            }
+            .nav {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                padding-right: 10px;
+            }
+            .nav a {
+                width: calc(100% - 20px);
+                max-width: none;
+                padding: 8px 15px;
+                display: block;
+                text-align: center;
+                box-sizing: border-box;
+                font-weight: bold;
+            }
+        }
     </style>
+    <script>
+        function playButtonSound() {
+            const audio = new Audio('AudioResource/button.mp3');
+            audio.play();
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -69,11 +117,11 @@
                 <img src="ImageResource/ghettotech_logo_animated.gif" alt="Ghettotech Logo">
             </div>
             <div class="nav">
-                <a href="#">HOME</a>
-                <a href="#">PRODUCTS</a>
-                <a href="#">MEDIA</a>
-                <a href="#">ABOUT US</a>
-				<a href="Legal.html">LEGAL</a>
+                <a href="#" onclick="playButtonSound()">HOME</a>
+                <a href="#" onclick="playButtonSound()">PRODUCTS</a>
+                <a href="#" onclick="playButtonSound()">MEDIA</a>
+                <a href="#" onclick="playButtonSound()">ABOUT US</a>
+                <a href="Legal.html" onclick="playButtonSound()">LEGAL</a>
             </div>
         </div>
         <div class="content">
