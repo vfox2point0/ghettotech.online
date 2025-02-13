@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const inputField = document.getElementById("input");
     const log = document.getElementById("log");
     const terminal = document.getElementById("terminal");
-    const inputContainer = document.getElementById("input-container");
 
     let commands = {}; // Stores loaded commands
     let loginStep = 0; // 0 = asking for username, 1 = asking for password, 2 = logged in
@@ -12,27 +11,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const correctUsername = "admin"; // Set your username
     const correctPassword = "ghettotech"; // Set your password
 
-    // --- Smart Fetch: Try Local First, Fallback to HTTP ---
+    // --- Load Commands from JSON ---
     async function loadCommands() {
-        let localPath = "commands.json";
-        let httpPath = "https://yourgithubusername.github.io/ghettotech.online/commands.json"; // Update to your actual repo URL
-
         try {
-            console.log("🔍 Trying to fetch commands locally...");
-            const response = await fetch(localPath);
-            if (!response.ok) throw new Error(`Local fetch failed: ${response.status}`);
+            const response = await fetch("commands.json");
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
             commands = await response.json();
-            console.log("✅ Successfully loaded commands locally:", commands);
+            console.log("✅ Commands loaded successfully:", commands);
         } catch (error) {
-            console.warn("⚠️ Local fetch failed, trying HTTP fallback...");
-            try {
-                const response = await fetch(httpPath);
-                if (!response.ok) throw new Error(`HTTP fetch failed: ${response.status}`);
-                commands = await response.json();
-                console.log("✅ Successfully loaded commands via HTTP:", commands);
-            } catch (httpError) {
-                console.error("❌ Failed to load commands from both sources.", httpError);
-            }
+            console.error("❌ Error loading commands:", error);
         }
     }
 
