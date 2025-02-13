@@ -18,8 +18,8 @@
 			display: flex;
 			flex-direction: column;
 			height: 100vh;
+			overflow: hidden; /* Prevents page scrolling */
 			border: 1px solid #33ff33; /* Thin green outline around the whole page */
-			position: relative;
 		}
 
 		/* Terminal container */
@@ -31,11 +31,10 @@
 			word-wrap: break-word;
 			background-color: #001100;
 			border-bottom: 1px solid #33ff33;
-			position: relative;
 			
-			/* Background Image (Transparency now handled in the image itself) */
+			/* Background Image */
 			background-image: url('ImageResource/ghettotech_logo_terminal_background.png');
-			background-size: contain; /* Keeps proportions correct, no stretching */
+			background-size: contain; /* Keeps proportions correct */
 			background-position: center;
 			background-repeat: no-repeat;
 		}
@@ -43,11 +42,15 @@
 		/* Input box container */
 		#input-container {
 			display: flex;
-			align-items: flex-start;
+			align-items: center;
 			padding: 10px;
 			background: black;
 			border-top: 1px solid #33ff33;
 			min-height: 30px; /* Ensures input box doesn't collapse */
+			position: fixed; /* Fixes input at bottom of screen */
+			bottom: 0;
+			left: 0;
+			width: 100%;
 		}
 
 		/* Terminal prompt */
@@ -91,6 +94,7 @@
 			padding-left: 20px; /* Indents output slightly */
 			white-space: pre-wrap; /* Ensures text wraps properly */
 		}
+
 		/* Error messages (unknown commands) */
 		.error {
 			color: #ff3333; /* Bright red for errors */
@@ -109,6 +113,20 @@
         <input type="text" id="input" autofocus>
     </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const inputField = document.getElementById("input");
+            const terminal = document.getElementById("terminal");
+
+            // Adjust terminal height when keyboard appears on mobile
+            function adjustForKeyboard() {
+                const screenHeight = window.innerHeight;
+                terminal.style.height = `${screenHeight - inputField.clientHeight - 20}px`;
+            }
+
+            window.addEventListener("resize", adjustForKeyboard);
+        });
+    </script>
     <script src="terminal.js"></script>
 </body>
 </html>
