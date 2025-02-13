@@ -27,15 +27,16 @@
 			flex-grow: 1;
 			padding: 10px;
 			overflow-y: auto;
-			white-space: pre-wrap;
+			white-space: pre-wrap; /* Ensures long lines wrap */
 			word-wrap: break-word;
 			background-color: #001100;
 			border-bottom: 1px solid #33ff33;
+			
+			/* Background Image */
 			background-image: url('ImageResource/ghettotech_logo_terminal_background.png');
-			background-size: contain;
+			background-size: contain; /* Keeps proportions correct */
 			background-position: center;
 			background-repeat: no-repeat;
-			transition: height 0.3s ease; /* Smooth transition when resizing */
 		}
 
 		/* Input box container */
@@ -45,12 +46,11 @@
 			padding: 10px;
 			background: black;
 			border-top: 1px solid #33ff33;
-			min-height: 30px;
-			position: fixed;
+			min-height: 30px; /* Ensures input box doesn't collapse */
+			position: fixed; /* Fixes input at bottom of screen */
 			bottom: 0;
 			left: 0;
 			width: 100%;
-			transition: bottom 0.3s ease; /* Smooth transition */
 		}
 
 		/* Terminal prompt */
