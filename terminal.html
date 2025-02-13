@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Terminal</title>
+    <style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			background-color: black;
+			color: #33ff33;
+			font-family: monospace;
+			display: flex;
+			flex-direction: column;
+			height: 100vh;
+			border: 1px solid #33ff33; /* Thin green outline around the whole page */
+			position: relative;
+		}
+
+		/* Terminal container */
+		#terminal {
+			flex-grow: 1;
+			padding: 10px;
+			overflow-y: auto;
+			white-space: pre-wrap; /* Ensures long lines wrap */
+			word-wrap: break-word;
+			background-color: #001100;
+			border-bottom: 1px solid #33ff33;
+			position: relative;
+			
+			/* Background Image (Transparency now handled in the image itself) */
+			background-image: url('ImageResource/ghettotech_logo_terminal_background.png');
+			background-size: contain; /* Keeps proportions correct, no stretching */
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+
+		/* Input box container */
+		#input-container {
+			display: flex;
+			align-items: flex-start;
+			padding: 10px;
+			background: black;
+			border-top: 1px solid #33ff33;
+			min-height: 30px; /* Ensures input box doesn't collapse */
+		}
+
+		/* Terminal prompt */
+		#prompt {
+			margin-right: 5px;
+			flex-shrink: 0; /* Ensures prompt stays in place */
+		}
+
+		/* User input field */
+		#input {
+			flex-grow: 1;
+			background: none;
+			border: 1px solid #33ff33; /* Thin green outline around the input field */
+			outline: none;
+			color: #33ff33;
+			font-family: monospace;
+			padding: 5px;
+			resize: none; /* Prevents manual resizing */
+			overflow-y: hidden; /* Hides internal scrollbar */
+			min-height: 20px; /* Ensures a reasonable starting height */
+			max-width: 100%;
+			white-space: pre-wrap;
+			word-wrap: break-word;
+		}
+
+		/* Styling for command and output formatting */
+		#log div {
+			display: flex;
+			flex-direction: column;
+			margin-bottom: 10px; /* Adds spacing between command entries */
+		}
+
+		/* User-entered command */
+		.command-line {
+			font-weight: bold;
+			opacity: 0.6; /* Slight transparency to make output stand out */
+		}
+
+		/* Command output */
+		.command-output {
+			padding-left: 20px; /* Indents output slightly */
+			white-space: pre-wrap; /* Ensures text wraps properly */
+		}
+		/* Error messages (unknown commands) */
+		.error {
+			color: #ff3333; /* Bright red for errors */
+			font-weight: bold;
+		}
+
+    </style>
+</head>
+<body>
+    <div id="terminal">
+		<div id="log"></div> <!-- Terminal will now only show what JavaScript prints -->
+    </div>
+
+    <div id="input-container">
+        <span id="prompt">></span>
+        <input type="text" id="input" autofocus>
+    </div>
+
+    <script src="terminal.js"></script>
+</body>
+</html>

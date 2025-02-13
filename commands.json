@@ -1,0 +1,5 @@
+{
+    "help": "Available commands: help, about, clear",
+    "about": "This is a fun web terminal for testing purposes.",
+    "clear": ""
+}
