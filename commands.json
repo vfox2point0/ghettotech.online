@@ -1,5 +1,10 @@
 {
-    "help": "I thought you knew what you was doin. Available commands: help, about, clear",
-    "about": "This terminal is developed and fuckin maintained by Ghetto Technology Limited. Now you best be knowin what you is doin around these parts, this some serious shit right here, this terminal for team playas only, my dude. This accesses the mainframes and shit, some crazy shit right here.",
-    "clear": ""
+	"help": "I thought you knew what you was doin. Available commands: help, about, clear, attack",
+	"about": "This terminal is developed and fuckin maintained by Ghetto Technology Limited. Now you best be knowin what you is doin around these parts, this some serious shit right here, this terminal for team playas only, my dude. This accesses the mainframes and shit, some crazy shit right here.",
+	"clear": "",
+	"fuck you": "Fuck you too, bitch ass fuckin lookin ass bitch. Be nice.",
+	"hello": "Well hello, asshole...",
+	"ghettotech": "damn right. we gon take over the world with this shit.",
+	"penis": "fuck outta here with that gay shit. hell nah, boy.",
+	"shoenice": "We humbly thank our homeboy, Shoenice, for his approval of our services."
 }
