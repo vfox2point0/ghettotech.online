@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	let attackMode = false; // Track if attack mode is active
 	let attackModeAudio = null;
 
-    const correctUsername = "admin"; // Set your username
-    const correctPassword = "ghettotech"; // Set your password
+    const correctUsername = "admin"; //username
+    const correctPassword = "hoodshit"; //password
 
     // --- Load Commands from JSON ---
 	async function loadCommands() {
@@ -111,6 +111,12 @@ document.addEventListener("DOMContentLoaded", function () {
 				// Allow "cancel" to exit attack mode
 				if (inputText === "cancel" && attackMode) {
 					exitAttackMode();
+					return;
+				}
+
+				// Handle "clear" command
+				if (inputText === "clear") {
+					log.innerHTML = "";
 					return;
 				}
 
@@ -258,7 +264,11 @@ document.addEventListener("DOMContentLoaded", function () {
 			attackModeAudio.pause();
 			attackModeAudio.currentTime = 0;
 			attackModeAudio = null; // Clear the reference to avoid reuse issues
+			exitHackingMessages();
 		}
+		
+		attackModeAudio = new Audio("AudioResource/attack_mode_exit.mp3");
+		attackModeAudio.play();
 
 		// Notify the user
 		printMessage("ATTACK MODE DEACTIVATED. RETURNING TO STANDARD OPERATION.", true, true);
@@ -319,7 +329,12 @@ document.addEventListener("DOMContentLoaded", function () {
 			"  - ghettotech.online/sys/malkits/persistence-anchor... [INSTALLED],",
 			"  - ghettotech.online/sys/malkits/stealth-implant... [DEPLOYED],",
 			"[STATUS] ALL SYSTEM MODULES INITIALIZED SUCCESSFULLY...,",
-			"[STATUS] STANDING BY FOR OPERATOR INPUT..."
+			" ",
+			" ",
+			"[STATUS] STANDING BY FOR OPERATOR INPUT...",
+			"Please select your target using 'target name-here', or enter 'cancel' to exit attack mode.",
+			" ",
+			" "
 		];
 
 		function printNextMessage(index) {
@@ -329,6 +344,39 @@ document.addEventListener("DOMContentLoaded", function () {
 			printMessage(messages[index], true, true); // Print with red text
 
 			const delay = Math.random() * (50 - 1) + 100; // Random delay between 0.3s and 1.5s
+			setTimeout(() => printNextMessage(index + 1), delay);
+		}
+
+		printNextMessage(0);
+	}
+		
+	function exitHackingMessages() {
+		const messages = [
+			"[TERMINATION SEQUENCE] SHUTTING DOWN GHETTOTECH OPERATIONS CONSOLE v3.4.2...",
+			"[DISABLING] SYSTEM DRIVERS... [OFFLINE],",
+			"[DISABLING] NETWORK INTERCEPTORS... [DEACTIVATED],",
+			"[DISABLING] GTINIS (Network ID Spoofer)... [UNLOADED],",
+			"[DISABLING] RealTrapRemoteAccess Backdoor... [CLOSED],",
+			"[DISABLING] FentaNULL Remote Data-Wipe API... [LOCKED],",
+			"[SHUTDOWN] CLOSING TEST PORTS...,",
+			"  - 21 [FTP] CLOSED,",
+			"  - 22 [SSH] CLOSED,",
+			"  - 80 [HTTP] CLOSED,",
+			"  - 443 [HTTPS] CLOSED,",
+			"[SHUTDOWN] DISABLING PACKET MANIPULATION ENGINE... [OFF],",
+			"[SECURITY] RE-ENABLING LOGGING DAEMONS... [ONLINE],",
+			"[SECURITY] REMOVING PERSISTENT ACCESS SCRIPTS... [ERASED],",
+			"[STATUS] ALL SYSTEM MODULES TERMINATED SUCCESSFULLY...,",
+			"[STATUS] GHETTOTECH OPERATIONS CONSOLE SHUTDOWN COMPLETE..."
+		];
+
+		function printNextMessage(index) {
+			if (index >= messages.length) return;
+
+			playSound("AudioResource/input_text_submit.mp3"); // Play sound like normal text
+			printMessage(messages[index], false, false); // Print with red text
+
+			const delay = Math.random() * (1 - 1) + 100; // Random delay between 0.3s and 1.5s
 			setTimeout(() => printNextMessage(index + 1), delay);
 		}
 
