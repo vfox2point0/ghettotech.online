@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (loginStep === 1) {
                 if (enteredUsername === correctUsername && inputText === correctPassword) {
-                    printMessage("LOGIN SUCCESSFUL. WELCOME TO GHETTOTECH ADMIN TERMINAL.", false, true);
+                    printMessage("LOGIN SUCCESSFUL. WELCOME TO GHETTO TECHNOLOGY ADMIN TERMINAL.", false, true);
                     printMessage("YOU MAY NOW ENTER COMMANDS.", false, true);
                     loginStep = 2;
                 } else {
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Start login prompt
-    printMessage("WELCOME TO GHETTOTECH LIMITED.");
+    printMessage("WELCOME TO GHETTO TECHNOLOGY LIMITED.");
     printMessage("YOU HAVE REACHED THE ADMIN TERMINAL.");
     printMessage("PLEASE LOG IN TO CONTINUE.");
     printMessage("USERNAME:");
