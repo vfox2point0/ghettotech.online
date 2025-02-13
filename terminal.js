@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         printMessage(commands[inputText], false, true);
                     }
                 } else {
-                    printMessage("Unknown command. Type 'help' for a list of available commands.", true, true);
+                    printMessage("Unknown command, stupid bitch. Type 'help' for a list of available commands.", true, true);
                 }
             }
 
