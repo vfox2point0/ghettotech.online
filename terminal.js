@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	let attackMode = false; // Track if attack mode is active
 	let attackModeAudio = null;
 
-    const correctUsername = "admin"; //username
+    const correctUsername = "admin"; // Set your username
     const correctPassword = "hoodshit"; //password
 
     // --- Load Commands from JSON ---
@@ -27,29 +27,56 @@ document.addEventListener("DOMContentLoaded", function () {
 
 			// Fallback local commands
 			commands = {
-				"help": "I thought you knew what you was doin. Available commands: help, about, clear, attack",
+				"help": "I thought you knew what you was doin. /nAvailable Commands: /n /cylw- help/n /cylw- clear/n /cylw- about/n /cylw- attack/n /cylw- ipconfig/n /cylw- version",
 				"about": "This terminal is developed and fuckin maintained by Ghetto Technology Limited. Now you best be knowin what you is doin around these parts, this some serious shit right here, this terminal for team playas only, my dude. This accesses the mainframes and shit, some crazy shit right here.",
 				"clear": "",
+				"ver": "Ghetto Technology Limited | Terminal /cylwVersion 1.2.0/n /cylw02/04/2025",
+				"version": "Ghetto Technology Limited | Terminal /cylwVersion 1.2.0/n /cylw02/04/2025",
 				"fuck you": "Fuck you too, bitch ass fuckin lookin ass bitch. Be nice.",
 				"hello": "Well hello, asshole...",
 				"ghettotech": "damn right. we gon take over the world with this shit.",
 				"penis": "fuck outta here with that gay shit. hell nah, boy.",
-				"shoenice": "We humbly thank our homeboy, Shoenice, for his approval of our services."
+				"shoenice": "We humbly thank our homeboy, Shoenice, for his approval of our services.",
+				
+				"ipconfig": "/cylwGhetto Technology In-House Network Configuration/nREAL-ZINGA-ENTERPRISE - IP Configuration/n/crst/n Host Name . . . . . . . . . . . . . . . . : GTECH-Terminal-009/n Primary DNS Suffix . . . . . . . . . . . : ghettotech.online/n Node Type . . . . . . . . . . . . . . . . : Hybrid/n IP Routing Enabled. . . . . . . . . . . . : Yes/n WINS Proxy Enabled. . . . . . . . . . . . : No/n/n /cylwEthernet adapter GT-RedGUMs Virtual Interface:/crst/n Connection-specific DNS Suffix  . . . . . : ghettotech.online/sys/netconfig/n Description . . . . . . . . . . . . . . . : GT RedGUM Network Interface/n Physical Address. . . . . . . . . . . . . : 2F-44-98-BD-1A-FF/n DHCP Enabled. . . . . . . . . . . . . . . : Yes/n Autoconfiguration Enabled . . . . . . . . : Yes/n IPv4 Address. . . . . . . . . . . . . . . : 178.90.213.12/n Subnet Mask . . . . . . . . . . . . . . . : 255.255.255.0/n Default Gateway . . . . . . . . . . . . . : 178.90.213.1/n/n /cylwWireless LAN adapter RealTrapRemoteAccess:/crst/n Connection-specific DNS Suffix  . . . . . : ghettotech.online/sys/wlan/n Description . . . . . . . . . . . . . . . : REAL-ZINGA-ENTERPRISE Wireless Driver/n Physical Address. . . . . . . . . . . . . : 00-1A-92-7F-D4-5B/n DHCP Enabled. . . . . . . . . . . . . . . : Yes/n Autoconfiguration Enabled . . . . . . . . : Yes/n IPv4 Address. . . . . . . . . . . . . . . : 10.128.44.33 (Preferred)/n Subnet Mask . . . . . . . . . . . . . . . : 255.255.0.0/n Default Gateway . . . . . . . . . . . . . : 10.128.44.1/n DHCP Server . . . . . . . . . . . . . . . : 10.128.0.1/n DNS Servers . . . . . . . . . . . . . . . : 10.128.0.2/n 8.8.8.8/n/n /cylwTunnel adapter FentaNULL Secure Proxy:/crst/n Connection-specific DNS Suffix  . . . . . : ghettotech.online/sys/fentanull/n Description . . . . . . . . . . . . . . . : FentaNULL Secure Data-Tunnel Driver/n Physical Address. . . . . . . . . . . . . : 5A-88-6C-22-BF-98/n DHCP Enabled. . . . . . . . . . . . . . . : No/n Autoconfiguration Enabled . . . . . . . . : Yes/n IPv6 Address. . . . . . . . . . . . . . . : fe80::9aa2:4cff:fe12:b776%4 (Preferred)/n Default Gateway . . . . . . . . . . . . . : ::/n DNS Servers . . . . . . . . . . . . . . . : fntnull.ghettotech.online/sys/n NetBIOS over Tcpip. . . . . . . . . . . . : Disabled/n/n /cylwStatus: CONNECTED TO GTECH-ENTERPRISE NETWORK/n RedGUM Network Encryption: Enabled/n RealZingaMalware Suite: Active/n FentaNULL Secure Proxy: Armed/n/n /cylwGHETTOTECH.NETWORK.SYSTEMS/n/crstAll network configurations loaded successfully./n",
+				
+				"_comment": "/n → Adds a new line",
+				"_comment": "/cred → Changes text color to red",
+				"_comment": "/cylw → Changes text color to yellow",
+				"_comment": "/crst → Resets color to default"
 			};
 		}
 	}
 
     loadCommands(); // Call function to load commands
 
-    function printMessage(message, isError = false, fast = false) {
-        const outputText = document.createElement("div");
-        outputText.classList.add("command-output");
-        if (isError) outputText.classList.add("error");
-        log.appendChild(outputText);
-        terminal.scrollTop = terminal.scrollHeight;
+	function printMessage(message, isError = false, fast = false) {
+		const outputContainer = document.createElement("div");
+		outputContainer.classList.add("command-output");
 
-        typeText(outputText, message, fast ? 5 : 20);
-    }
+		if (isError) outputContainer.classList.add("error");
+
+		log.appendChild(outputContainer);
+		terminal.scrollTop = terminal.scrollHeight;
+
+		// Parse the message formatting
+		const formattedMessage = parseFormattedText(message);
+
+		// Apply typewriter effect
+		typeText(outputContainer, formattedMessage, fast ? 5 : 20);
+	}
+
+	// Function to parse text formatting
+	function parseFormattedText(text) {
+		const replacements = {
+			"/n": "<br>",
+			"/cred": '<span style="color:#ff3333">',
+			"/cylw": '<span style="color:#ffff33">',
+			"/crst": '</span>'
+		};
+
+		return text.replace(/\/n|\/cred|\/cylw|\/crst/g, match => replacements[match] || match);
+	}
 
 	inputField.addEventListener("keydown", async function (event) {
 		if (event.key === "Enter") {
@@ -190,23 +217,55 @@ document.addEventListener("DOMContentLoaded", function () {
         typeSound.currentTime = 0;
     }
 
-    function typeText(element, text, speed = 20) {
-        let i = 0;
-        activeTypingCount++;
-        startTypingSound();
+	function typeText(element, text, speed = 20) {
+		let lines = text.split("/n"); // Split text into separate lines
+		let currentLine = 0;
+		let activeCharacters = 0; // Tracks how many characters are actively being typed
 
-        function type() {
-            if (i < text.length) {
-                element.textContent += text[i];
-                i++;
-                setTimeout(type, speed);
-            } else {
-                activeTypingCount--;
-                if (activeTypingCount === 0) stopTypingSound();
-            }
-        }
-        type();
-    }
+		activeTypingCount++;
+		startTypingSound(); // Start looping sound
+
+		function typeLine() {
+			if (currentLine >= lines.length) {
+				activeTypingCount--;
+				if (activeTypingCount === 0) stopTypingSound(); // Stop when all text has finished
+				return;
+			}
+
+			let line = parseFormattedText(lines[currentLine]); // Apply color formatting
+			let lineElement = document.createElement("div");
+			element.appendChild(lineElement); // Append new line to terminal
+
+			let i = 0;
+			activeCharacters += line.length; // Keep track of how many characters will be typed
+
+			function typeChar() {
+				if (i < line.length) {
+					lineElement.innerHTML = line.substring(0, i + 1);
+					i++;
+					setTimeout(typeChar, speed);
+				} else {
+					activeCharacters -= line.length; // Reduce the count once a line is fully typed
+					if (activeCharacters <= 0) {
+						activeTypingCount--;
+						if (activeTypingCount === 0) stopTypingSound(); // Stop sound if ALL characters are done
+					}
+				}
+			}
+
+			typeChar(); // Start typewriter effect for this line
+			currentLine++;
+
+			// Start next line while ensuring typing sound continues
+			setTimeout(() => {
+				if (currentLine < lines.length) {
+					typeLine();
+				}
+			}, 10);
+		}
+
+		typeLine();
+	}
 	
 	function enterAttackMode() {
 		attackMode = true;
